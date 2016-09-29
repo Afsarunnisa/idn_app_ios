@@ -13,7 +13,7 @@ import MBProgressHUD
 
 class ChangePasswordVC: UIViewController,getAuthApiResponseDelegate{
     
-    @IBOutlet weak var menuButton:UIBarButtonItem!
+//    @IBOutlet weak var menuButton:UIBarButtonItem!
     @IBOutlet weak var currentPasswordTF: UITextField!
     @IBOutlet weak var newPasswordTF: UITextField!
     @IBOutlet weak var changePasswordBtn: UIButton!
@@ -21,6 +21,8 @@ class ChangePasswordVC: UIViewController,getAuthApiResponseDelegate{
     var authApi : AuthApi = AuthApi()
 
     var hud : MBProgressHUD = MBProgressHUD()
+    @IBOutlet weak var menuButton: UIButton!
+    @IBOutlet weak var bannerImageView: UIImageView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,24 +36,55 @@ class ChangePasswordVC: UIViewController,getAuthApiResponseDelegate{
         nav?.tintColor = UIColor.darkGrayColor()
         nav?.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.darkGrayColor()]
         nav?.backgroundColor = UIColor.darkGrayColor()
-
+        
         if self.revealViewController() != nil {
-            menuButton.target = self.revealViewController()
-            menuButton.action = "revealToggle:"
+            menuButton.addTarget(self.revealViewController(), action:#selector(self.revealViewController().revealToggle(_:)), forControlEvents: .TouchUpInside)
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         }
         
+        
+        changePasswordBtn.layer.cornerRadius = 8
+
+        
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.translucent = true
+
+        utilities.textFieldBottomBorder(currentPasswordTF)
+        utilities.textFieldBottomBorder(newPasswordTF)
+
+        
         // email paddword left mode images
         
-        utilities.setLeftIcons("lock-icon.png", textField: currentPasswordTF)
-        utilities.setLeftIcons("lock-icon.png", textField: newPasswordTF)
+//        utilities.setLeftIcons("lock-icon.png", textField: currentPasswordTF)
+//        utilities.setLeftIcons("lock-icon.png", textField: newPasswordTF)
 
         // login button corner radius
-        changePasswordBtn.layer.cornerRadius = 2
         
         authApi.delegate = self
+        
+//        let gradient = CAGradientLayer()
+//        gradient.name = "ImgGradientLayer"
+//        gradient.frame = bannerImageView.frame
+//        gradient.colors = [
+//            UIColor(white: 0, alpha: 0.1).CGColor,
+//            UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.7).CGColor
+//        ]
+//        
+//        bannerImageView.layer.insertSublayer(gradient, atIndex: 0)
+        
+        
+        let imgHeight : CGFloat = bannerImageView.frame.size.height
+        utilities.addGradientLayer(bannerImageView, height: Int(imgHeight))
+
+
     }
     
+    
+    override func viewWillAppear(animated: Bool) {
+        self.navigationController?.navigationBarHidden = true
+    }
+
     
     // MARK: - Button Actions
 
@@ -103,22 +136,22 @@ class ChangePasswordVC: UIViewController,getAuthApiResponseDelegate{
         self.presentViewController(loginVC, animated: true, completion: nil)
     }
     
-    func handleRefreshTokenResponse(tokenEntity:TokenApiModel){
-        print("tokenEntity \(tokenEntity)")
-
-        MBProgressHUD.hideHUDForView(self.view, animated: true)
-        let defaults = NSUserDefaults.standardUserDefaults()
-        let accessToken = tokenEntity.access_token
-        
-        let date = NSDate()
-        
-        defaults.setObject(accessToken, forKey: "access_token")
-        defaults.setObject(tokenEntity.refresh_token, forKey: "refresh_token")
-        defaults.setObject(tokenEntity.expires_in, forKey: "expires_in")
-        defaults.setObject(date, forKey: "startDate")
-        
-        defaults.synchronize()
-    }
+//    func handleRefreshTokenResponse(tokenEntity:TokenApiModel){
+//        print("tokenEntity \(tokenEntity)")
+//
+//        MBProgressHUD.hideHUDForView(self.view, animated: true)
+//        let defaults = NSUserDefaults.standardUserDefaults()
+//        let accessToken = tokenEntity.access_token
+//        
+//        let date = NSDate()
+//        
+//        defaults.setObject(accessToken, forKey: "access_token")
+//        defaults.setObject(tokenEntity.refresh_token, forKey: "refresh_token")
+//        defaults.setObject(tokenEntity.expires_in, forKey: "expires_in")
+//        defaults.setObject(date, forKey: "startDate")
+//        
+//        defaults.synchronize()
+//    }
 
     
     

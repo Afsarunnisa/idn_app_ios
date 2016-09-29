@@ -34,17 +34,17 @@ var SOCIAL_INSTAGRAM_BTN        = "Instagram"
 
 // Validations Errors
 
-let USER_NAME_VALID_PLACEHOLDER = "Username"
+let USER_NAME_VALID_PLACEHOLDER = "Email*"
 let USER_NAME_IN_VALID_PLACEHOLDER = "Please enter username!"
 
-let PASSWORD_VALID_PLACEHOLDER = "Password"
+let PASSWORD_VALID_PLACEHOLDER = "Password*"
 let PASSWORD_IN_VALID_PLACEHOLDER = "Please enter password!"
 
 
-let EMAIL_VALID_PLACEHOLDER = "Email"
+let EMAIL_VALID_PLACEHOLDER = "Email*"
 let EMAIL_IN_VALID_PLACEHOLDER = "Please enter email id!"
 
-let FIRST_NAME_VALID_PLACEHOLDER = "First Name"
+let FIRST_NAME_VALID_PLACEHOLDER = "First Name*"
 let FIRST_NAME_IN_VALID_PLACEHOLDER = "Please enter first name!"
 
 let LAST_NAME_VALID_PLACEHOLDER = "Last Name"
@@ -58,6 +58,27 @@ var USER_SOCIAL_CONNECTS : NSMutableArray!
 var CLIENT_ID = NSBundle.mainBundle().infoDictionary?["WavelabsAPISettings"]!.objectForKey("WAVELABS_CLIENT_ID") as! String
 var BASE_URL = NSBundle.mainBundle().infoDictionary?["WavelabsAPISettings"]!.objectForKey("WAVELABS_BASE_URL") as! String
 var CLIENT_SECRET = NSBundle.mainBundle().infoDictionary?["WavelabsAPISettings"]!.objectForKey("WAVELABS_CLIENT_SECRET") as! String
+
+
+
+struct ScreenSize
+{
+    static let SCREEN_WIDTH = UIScreen.mainScreen().bounds.size.width
+    static let SCREEN_HEIGHT = UIScreen.mainScreen().bounds.size.height
+    static let SCREEN_MAX_LENGTH = max(ScreenSize.SCREEN_WIDTH, ScreenSize.SCREEN_HEIGHT)
+    static let SCREEN_MIN_LENGTH = min(ScreenSize.SCREEN_WIDTH, ScreenSize.SCREEN_HEIGHT)
+}
+
+
+
+
+struct DeviceType
+{
+    static let IS_IPHONE_4_OR_LESS =  UIDevice.currentDevice().userInterfaceIdiom == .Phone && ScreenSize.SCREEN_MAX_LENGTH < 568.0
+    static let IS_IPHONE_5 = UIDevice.currentDevice().userInterfaceIdiom == .Phone && ScreenSize.SCREEN_MAX_LENGTH == 568.0
+    static let IS_IPHONE_6 = UIDevice.currentDevice().userInterfaceIdiom == .Phone && ScreenSize.SCREEN_MAX_LENGTH == 667.0
+    static let IS_IPHONE_6P = UIDevice.currentDevice().userInterfaceIdiom == .Phone && ScreenSize.SCREEN_MAX_LENGTH == 736.0
+}
 
 
 class utilities {
@@ -175,8 +196,6 @@ class utilities {
     }
     
     
-    
-    
     class func getParamsFromDict(paramsDict : NSDictionary) -> [String: AnyObject?] {
         
         let paramsStr = NSMutableString()
@@ -204,8 +223,6 @@ class utilities {
         return UIColor(red:red, green:green, blue:blue, alpha:CGFloat(alpha))
     }
     
-
-    
     
     class func textFieldBottomBorder(textField: UITextField) {
         
@@ -221,11 +238,37 @@ class utilities {
     }
     
     
+    class func addGradientLayer(imageView: UIImageView, height: Int) {
     
     
-    
-    
-    
-    
-    
+       
+        let gradient = CAGradientLayer()
+        gradient.name = "ImgGradientLayer"
+        gradient.frame = CGRectMake(imageView.frame.origin.x, imageView.frame.origin.y, imageView.frame.size.width, CGFloat(height))
+       
+        gradient.colors = [
+                 UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.3).CGColor,
+                 UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.3).CGColor
+             ]
+        
+        
+        let url = NSURL(string: "{{banner}}")
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+            
+            if(url != nil){
+                let data = NSData(contentsOfURL: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check
+                if(data != nil){
+                    dispatch_async(dispatch_get_main_queue(), {
+                        imageView.image = UIImage(data: data!)
+                    });
+                }else{
+                    imageView.image = UIImage(named:"console-window.png")
+                }
+            }else{
+                imageView.image = UIImage(named:"console-window.png")
+            }
+        }
+        imageView.layer.insertSublayer(gradient, atIndex: 0)
+    }
 }

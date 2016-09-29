@@ -16,8 +16,53 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+       
+        
+        
+//        let app_context = IdsIosApiContext.init(name: "app")
+//        IdnSDK.init(apiContext: app_context)
+//        
+//        IdentityIdsRegistry()
+//        TokenIdsRegistry()
+        
+        
+        var configureError: NSError?
+        GGLContext.sharedInstance().configureWithError(&configureError)
+        assert(configureError == nil, "Error configuring Google services: \(configureError)")
+
+        
         return true
     }
+    
+    
+    func application(application: UIApplication,
+                     openURL url: NSURL,
+                             sourceApplication: String?,
+                             annotation: AnyObject?) -> Bool {
+        
+        var handled: Bool = false
+        let isFb = url.scheme.hasPrefix("fb")
+        
+        if (isFb == true){
+            handled = FBSDKApplicationDelegate.sharedInstance().application(
+                application,
+                openURL: url,
+                sourceApplication: sourceApplication,
+                annotation: annotation)
+        } else if(url.path!.hasPrefix("/linkedin")){
+            return true
+        }else {
+            return GIDSignIn.sharedInstance().handleURL(url,
+                                                        sourceApplication: sourceApplication,
+                                                        annotation: annotation)
+        }
+        
+//        if(LISDKCallbackHandler.shouldHandleUrl(url)){
+//            return LISDKCallbackHandler.application(application, openURL: url, sourceApplication: sourceApplication, annotation: annotation)
+//        }
+        return handled
+    }
+
 
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

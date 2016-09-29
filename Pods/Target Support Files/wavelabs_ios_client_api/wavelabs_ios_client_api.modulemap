@@ -1,0 +1,6 @@
+framework module wavelabs_ios_client_api {
+  umbrella header "wavelabs_ios_client_api-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -18,6 +18,7 @@ import wavelabs_ios_client_api
 class RegistrationVC: UIViewController,GIDSignInUIDelegate,GIDSignInDelegate,getUsersApiResponseDelegate,getSocialApiResponseDelegate {
     
     
+    @IBOutlet weak var bannerImageView: UIImageView!
     var hud : MBProgressHUD = MBProgressHUD()
 
     var kPreferredTextFieldToKeyboardOffset: CGFloat = 600.0
@@ -43,13 +44,17 @@ class RegistrationVC: UIViewController,GIDSignInUIDelegate,GIDSignInDelegate,get
 
     @IBOutlet weak var loginButton: UIButton!
     
+    var bannerImg_View_Height_Constraint:NSLayoutConstraint!
+
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // navigation bar title
         self.title = "Registration"
         
-        self.automaticallyAdjustsScrollViewInsets = false
+//        self.automaticallyAdjustsScrollViewInsets = false
         
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
@@ -65,7 +70,8 @@ class RegistrationVC: UIViewController,GIDSignInUIDelegate,GIDSignInDelegate,get
         signUpBtn.layer.cornerRadius = 8
         loginButton.contentHorizontalAlignment = .Left
 
-        
+        googleSignInButton.style = GIDSignInButtonStyle.IconOnly
+
         
         
         if(utilities.deviceType() as! String == "iPhone 4/4s" || utilities.deviceType() as! String == "iPhone 5/5s"){
@@ -83,6 +89,36 @@ class RegistrationVC: UIViewController,GIDSignInUIDelegate,GIDSignInDelegate,get
         usersApi.delegate = self
         socialApi.delegate = self
         
+        
+        
+        var imgHeight : Int = 140
+        
+        
+        if(DeviceType.IS_IPHONE_5 || DeviceType.IS_IPHONE_4_OR_LESS){
+            imgHeight = 140
+        }else if(DeviceType.IS_IPHONE_6){
+            imgHeight = 160
+            
+        }else if(DeviceType.IS_IPHONE_6P){
+            imgHeight = 200
+        }
+        
+        
+        if(bannerImg_View_Height_Constraint != nil){
+            self.view.removeConstraint(bannerImg_View_Height_Constraint)
+        }
+        
+        bannerImg_View_Height_Constraint  = (NSLayoutConstraint(
+            item:bannerImageView, attribute:NSLayoutAttribute.Height,
+            relatedBy:NSLayoutRelation.Equal,
+            toItem:nil, attribute:NSLayoutAttribute.NotAnAttribute,
+            multiplier:0, constant:CGFloat(imgHeight)))
+        
+        
+        self.view.addConstraint(bannerImg_View_Height_Constraint)
+        
+        utilities.addGradientLayer(bannerImageView, height: imgHeight)
+
     }
     
     
@@ -208,6 +244,13 @@ class RegistrationVC: UIViewController,GIDSignInUIDelegate,GIDSignInDelegate,get
         }
     }
     
+    @IBAction func goBackBtnClick(sender: AnyObject) {
+        if let navController = self.navigationController {
+            navController.popViewControllerAnimated(true)
+        }
+    }
+
+    
     
     // MARK: - Google Plus Delegate Methods
     
@@ -303,6 +346,9 @@ class RegistrationVC: UIViewController,GIDSignInUIDelegate,GIDSignInDelegate,get
             
             let date = NSDate()
             
+          
+            defaults.setObject(memberEty.firstName, forKey: "currentMemberName")
+            
             defaults.setObject(memberEty.id, forKey: "user_id")
             defaults.setObject(accessToken, forKey: "access_token")
             defaults.setObject(tokenEty.refresh_token, forKey: "refresh_token")
@@ -325,6 +371,8 @@ class RegistrationVC: UIViewController,GIDSignInUIDelegate,GIDSignInDelegate,get
             let accessToken = tokenEty.access_token
             
             let date = NSDate()
+            
+            defaults.setObject(memberEty, forKey: "currentMember")
             
             defaults.setObject(memberEty.id, forKey: "user_id")
             defaults.setObject(accessToken, forKey: "access_token")

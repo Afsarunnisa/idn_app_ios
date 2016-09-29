@@ -10,4 +10,16 @@
 #define idn_app_ios_Bridging_Header_h
 
 
+
+#import "SWRevealViewController.h"
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
+
+
+#import <libxml/HTMLtree.h>
+#import <libxml/xpath.h>
+
+#import <Google/SignIn.h>
+
+
 #endif /* idn_app_ios_Bridging_Header_h */
