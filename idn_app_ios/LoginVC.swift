@@ -36,7 +36,7 @@ class LoginVC: UIViewController,UIAlertViewDelegate,UITextFieldDelegate,UIImageP
     // alert views with actions
     
     var forgotPasswordAlert = UIAlertView()
-    var digitsRegisterAlert = UIAlertView()
+
     
     var authApi : AuthApi = AuthApi()
     var socialApi : SocialApi = SocialApi()
@@ -115,7 +115,9 @@ class LoginVC: UIViewController,UIAlertViewDelegate,UITextFieldDelegate,UIImageP
         
         utilities.addGradientLayer(bannerImageView, height: imgHeight)
         utilities.addLogoImage(logoImageView)
-    
+        utilities.statusBarGradientAppear()
+        
+        
         authApi.getClientToken(clientTokenDict)
         
     }
@@ -123,7 +125,7 @@ class LoginVC: UIViewController,UIAlertViewDelegate,UITextFieldDelegate,UIImageP
     override func viewWillAppear(animated: Bool) {
         
         super.viewWillAppear(animated);
-        var  failResponse = Dictionary<String, String>()
+        var failResponse = Dictionary<String, String>()
         let defaults = NSUserDefaults.standardUserDefaults()
         
         if((utilities.nullToNil(defaults.objectForKey("webViewFailResponse") == nil)) != nil){
@@ -131,6 +133,8 @@ class LoginVC: UIViewController,UIAlertViewDelegate,UITextFieldDelegate,UIImageP
         }else{
             failResponse = defaults.objectForKey("user_id")! as! Dictionary
         }
+        
+        
         refreshTextFields()
         
         self.navigationController?.navigationBarHidden = true
@@ -278,10 +282,10 @@ class LoginVC: UIViewController,UIAlertViewDelegate,UITextFieldDelegate,UIImageP
                 withError error: NSError!) {
         if (error == nil) {
             // Perform any operations on signed in user here.
-            let userId = user.userID                  // For client-side use only!
-            let idToken = user.authentication.idToken // Safe to send to the server
-            let name = user.profile.name
-            let email = user.profile.email
+//            let userId = user.userID                  // For client-side use only!
+//            let idToken = user.authentication.idToken // Safe to send to the server
+//            let name = user.profile.name
+//            let email = user.profile.email
             let accessToken = user.authentication.accessToken // Safe to send to the server
             
             let socialLoginDict : NSMutableDictionary = NSMutableDictionary()
@@ -354,15 +358,6 @@ class LoginVC: UIViewController,UIAlertViewDelegate,UITextFieldDelegate,UIImageP
                     authApi.forgotPassword(forgotPswDict)
                 }
             }
-        }else if(alertView == digitsRegisterAlert){
-            if(buttonIndex == 1){
-                
-                //                let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                //                let digitsSignUpVC: DigitsSignUpVC = mainStoryboard.instantiateViewControllerWithIdentifier("DigitsSignUpVC") as! DigitsSignUpVC
-                //
-                //                self.navigationController?.pushViewController(digitsSignUpVC, animated: true)
-                
-            }
         }
     }
     
@@ -420,7 +415,7 @@ class LoginVC: UIViewController,UIAlertViewDelegate,UITextFieldDelegate,UIImageP
         if(responseDict["url"] != nil){
             self.webViewRedirectUrl = responseDict.objectForKey("url") as! String
             
-            let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+//            let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
             //            var webViewVC: WebViewVC = mainStoryboard.instantiateViewControllerWithIdentifier("WebViewVC") as! WebViewVC
             //
             //            webViewVC.redirectUrl = webViewRedirectUrl
@@ -456,7 +451,7 @@ class LoginVC: UIViewController,UIAlertViewDelegate,UITextFieldDelegate,UIImageP
         
         let errorMessage: NSMutableString = ""
         
-        for var i = 0; i < messageCodeEntityArray.count; i++ {
+        for i in 0 ..< messageCodeEntityArray.count {
             let messageCode : ValidationMessagesApiModel = messageCodeEntityArray.objectAtIndex(i) as! ValidationMessagesApiModel
             let messageStr = messageCode.message
             errorMessage.appendString(messageStr)

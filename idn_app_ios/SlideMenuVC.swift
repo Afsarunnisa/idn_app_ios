@@ -49,9 +49,7 @@ class SlideMenuVC: UIViewController,UITableViewDelegate,getAuthApiResponseDelega
         if statusBar.respondsToSelector(Selector("setBackgroundColor:")) {
             statusBar.backgroundColor = UIColor(red: 56/255.0, green: 63/255.0, blue: 69/255.0, alpha: 1.0)
         }
-
     }
-    
     
     override func viewWillDisappear(animated: Bool) {
         let statusBar: UIView = UIApplication.sharedApplication().valueForKey("statusBar") as! UIView
@@ -171,5 +169,4 @@ class SlideMenuVC: UIViewController,UITableViewDelegate,getAuthApiResponseDelega
         hud.mode = .Indeterminate
         hud.labelText = "Loading"
     }
-
 }

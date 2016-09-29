@@ -17,32 +17,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
        
-        
-        
-//        let app_context = IdsIosApiContext.init(name: "app")
-//        IdnSDK.init(apiContext: app_context)
-//        
-//        IdentityIdsRegistry()
-//        TokenIdsRegistry()
-        
-        
         var configureError: NSError?
         GGLContext.sharedInstance().configureWithError(&configureError)
         assert(configureError == nil, "Error configuring Google services: \(configureError)")
-        
-//        let clientID = "{{clinetId}}"
-//        let clientSecret = "{{clinetSecret}}"
-//        
-//        if(clientID != "" && clientSecret != ""){
-//            
-//        }
-//        
-//        let documentsDirectory = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as NSString
-//        let path : NSString = documentsDirectory.stringByAppendingPathComponent("info.plist")
-//        let data : NSMutableDictionary = NSMutableDictionary(contentsOfFile: path as String)!
-//        data.setObject("{{clinetId}}", forKey: "key")
-//        data.setObject("{{clinetSecret}}", forKey: "key")
-//        data.writeToFile(path as String, atomically: true)
         
         return true
     }
@@ -69,10 +46,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                                         sourceApplication: sourceApplication,
                                                         annotation: annotation)
         }
-        
-//        if(LISDKCallbackHandler.shouldHandleUrl(url)){
-//            return LISDKCallbackHandler.application(application, openURL: url, sourceApplication: sourceApplication, annotation: annotation)
-//        }
         return handled
     }
 

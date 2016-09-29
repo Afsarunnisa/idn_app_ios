@@ -68,21 +68,11 @@ class SettingsVC: UIViewController,UINavigationControllerDelegate,UIImagePickerC
 
         // for slider menu
         if self.revealViewController() != nil {
-//            menuButton.target = self.revealViewController()
-//            menuButton.action = "revealToggle:"
-            
-            
             menuButton.addTarget(self.revealViewController(), action:#selector(self.revealViewController().revealToggle(_:)), forControlEvents: .TouchUpInside)
 
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         }
         
-        
-        // emial textfield icon
-        utilities.setLeftIcons("mail-icon.png", textField: emailTF)
-        
-        // login button corner radius
-
         
         let defaults = NSUserDefaults.standardUserDefaults()
         var userID : String
@@ -93,7 +83,7 @@ class SettingsVC: UIViewController,UINavigationControllerDelegate,UIImagePickerC
             userID = defaults.stringForKey("user_id")! 
         }
 
-        let url = NSString(format:"%@users/%@", utilities.serviceUrl,userID) as String
+//        let url = NSString(format:"%@users/%@", utilities.serviceUrl,userID) as String
         
         
         usersApi.delegate = self
@@ -209,7 +199,7 @@ class SettingsVC: UIViewController,UINavigationControllerDelegate,UIImagePickerC
         imagePicker.delegate = self
         self.popOver  = UIPopoverController(contentViewController: imagePicker)
     
-        var backgroundQueue = NSOperationQueue()
+        let backgroundQueue = NSOperationQueue()
         
         backgroundQueue.addOperationWithBlock(){
             NSOperationQueue.mainQueue().addOperationWithBlock(){
@@ -220,7 +210,6 @@ class SettingsVC: UIViewController,UINavigationControllerDelegate,UIImagePickerC
 
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
 
-//    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
         
         let selectedImg = info[UIImagePickerControllerOriginalImage] as! UIImage
         userImageView.contentMode = .ScaleAspectFit //3
@@ -228,32 +217,8 @@ class SettingsVC: UIViewController,UINavigationControllerDelegate,UIImagePickerC
         dismissViewControllerAnimated(true, completion: nil) //5
     
         
-//        var dirPath: String = ""
-//        
         let nsDocumentDirectory = NSSearchPathDirectory.DocumentDirectory
         let nsUserDomainMask    = NSSearchPathDomainMask.UserDomainMask
-//
-//        
-//        if let paths = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true){
-//        
-//        
-////        if let paths            = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true){
-//            if paths.count > 0{
-//                dirPath = (paths[0] as? String)!
-//            }
-//        }
-        
-//        var dirPath = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true)
-//        let dirpathStr : String = dirPath[0]
-//        
-//        let imagesDirectory = NSURL(fileURLWithPath: dirpathStr).URLByAppendingPathComponent("Images")
-
-//        var imagesDirectory : String = dirpathStr.stringByAppendingPathComponent("Images")
-        
-//        var fileManager : NSFileManager = NSFileManager.defaultManager()
-//        let err: NSError
-//        var isDir : ObjCBool = false
-        
         
         let defaults = NSUserDefaults.standardUserDefaults()
         let userID = defaults.stringForKey("user_id")
@@ -276,16 +241,11 @@ class SettingsVC: UIViewController,UINavigationControllerDelegate,UIImagePickerC
         }
 
         let storePath = NSURL(fileURLWithPath: imageDirURL.path!).URLByAppendingPathComponent(fileName)
-        
-//        var storePath : String = imagesDirectory.stringByAppendingPathComponent(fileName)
-        
         let imgData : NSData = UIImagePNGRepresentation(selectedImg)!
-//        imgData.writeToFile(storePath, atomically: true)
         imgData.writeToURL(storePath, atomically: false)
         
         self.addProgreeHud()
         mediaApi.uploadMedia("profile", imgName: fileName, userID: userID!)
-//        mediaApi.uploadMedia()
     }
     
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
@@ -355,7 +315,7 @@ class SettingsVC: UIViewController,UINavigationControllerDelegate,UIImagePickerC
         
         print("imgsArray \(imgsArray)")
         
-        for var i = 0; i < imgsArray.count; i++ {
+        for i in 0 ..< imgsArray.count {
             
             let mediaFileApiModel : MediaFileDetailsApiModel = imgsArray.objectAtIndex(i) as! MediaFileDetailsApiModel
             let mediaType = mediaFileApiModel.mediatype
@@ -401,7 +361,7 @@ class SettingsVC: UIViewController,UINavigationControllerDelegate,UIImagePickerC
     func handleValidationErrors(messageCodeEntityArray: NSArray){
         MBProgressHUD.hideHUDForView(self.view, animated: true)
         let errorMessage: NSMutableString = ""
-        for var i = 0; i < messageCodeEntityArray.count; i++ {
+        for i in 0 ..< messageCodeEntityArray.count {
             let messageCode : ValidationMessagesApiModel = messageCodeEntityArray.objectAtIndex(i) as! ValidationMessagesApiModel
             let messageStr = messageCode.message
             errorMessage.appendString(messageStr)

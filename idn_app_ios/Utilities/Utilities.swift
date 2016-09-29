@@ -293,4 +293,22 @@ class utilities {
     }
     
     
+    class func statusBarGradientAppear() {
+        
+        let statusBar: UIView = UIApplication.sharedApplication().valueForKey("statusBar") as! UIView
+
+        let gradient = CAGradientLayer()
+        gradient.name = "StatusGradientLayer"
+        gradient.frame = statusBar.frame
+        
+        gradient.colors = [
+            UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.3).CGColor,
+            UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.3).CGColor
+        ]
+        if statusBar.respondsToSelector(Selector("setBackgroundColor:")) {
+            statusBar.layer.insertSublayer(gradient, atIndex: 0)
+        }
+    }
+    
+    
 }

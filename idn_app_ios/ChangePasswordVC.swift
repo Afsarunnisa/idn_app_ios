@@ -55,25 +55,7 @@ class ChangePasswordVC: UIViewController,getAuthApiResponseDelegate{
         utilities.textFieldBottomBorder(newPasswordTF)
 
         
-        // email paddword left mode images
-        
-//        utilities.setLeftIcons("lock-icon.png", textField: currentPasswordTF)
-//        utilities.setLeftIcons("lock-icon.png", textField: newPasswordTF)
-
-        // login button corner radius
-        
         authApi.delegate = self
-        
-//        let gradient = CAGradientLayer()
-//        gradient.name = "ImgGradientLayer"
-//        gradient.frame = bannerImageView.frame
-//        gradient.colors = [
-//            UIColor(white: 0, alpha: 0.1).CGColor,
-//            UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.7).CGColor
-//        ]
-//        
-//        bannerImageView.layer.insertSublayer(gradient, atIndex: 0)
-        
         
         let imgHeight : CGFloat = bannerImageView.frame.size.height
         utilities.addGradientLayer(bannerImageView, height: Int(imgHeight))
@@ -154,9 +136,7 @@ class ChangePasswordVC: UIViewController,getAuthApiResponseDelegate{
 //        defaults.synchronize()
 //    }
 
-    
-    
-    
+        
     func handleMessages(messageCodeEntity : MessagesApiModel){
         
         MBProgressHUD.hideHUDForView(self.view, animated: true)
@@ -172,7 +152,7 @@ class ChangePasswordVC: UIViewController,getAuthApiResponseDelegate{
         MBProgressHUD.hideHUDForView(self.view, animated: true)
         let errorMessage: NSMutableString = ""
         
-        for var i = 0; i < messageCodeEntityArray.count; i++ {
+        for i in 0 ..< messageCodeEntityArray.count {
             let messageCode : ValidationMessagesApiModel = messageCodeEntityArray.objectAtIndex(i) as! ValidationMessagesApiModel
             let messageStr = messageCode.message
             errorMessage.appendString(messageStr)
@@ -181,7 +161,6 @@ class ChangePasswordVC: UIViewController,getAuthApiResponseDelegate{
         let alert = utilities.alertView("Alert", alertMsg: errorMessage as String,actionTitle: "Ok")
         self.presentViewController(alert, animated: true, completion: nil)
     }
-    
     
     func addProgreeHud(){
         hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)

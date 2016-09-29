@@ -27,17 +27,6 @@ class DashboardVC: UIViewController {
 
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         }
-        
-        
-//        let gradient = CAGradientLayer()
-//        gradient.name = "ImgGradientLayer"
-//        gradient.frame = bannerImageView.frame
-//        gradient.colors = [
-//            UIColor(white: 0, alpha: 0.1).CGColor,
-//            UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.7).CGColor
-//        ]
-//        
-//        bannerImageView.layer.insertSublayer(gradient, atIndex: 0)
 
         let imgHeight : CGFloat = bannerImageView.frame.size.height
         utilities.addGradientLayer(bannerImageView, height: Int(imgHeight))

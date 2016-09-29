@@ -33,7 +33,7 @@ class RegistrationVC: UIViewController,GIDSignInUIDelegate,GIDSignInDelegate,get
     @IBOutlet weak var passwordTF: UITextField!
     @IBOutlet weak var signUpBtn: UIButton!
     @IBOutlet weak var signUpScrollView: UIScrollView!
-//    @IBOutlet weak var userNameTF: UITextField!
+    @IBOutlet weak var userNameTF: UITextField!
     
     @IBOutlet weak var googleSignInButton: GIDSignInButton!
 
@@ -66,6 +66,7 @@ class RegistrationVC: UIViewController,GIDSignInUIDelegate,GIDSignInDelegate,get
         utilities.textFieldBottomBorder(lastNameTF)
         utilities.textFieldBottomBorder(emailTF)
         utilities.textFieldBottomBorder(passwordTF)
+        utilities.textFieldBottomBorder(userNameTF)
 
 
         signUpBtn.layer.cornerRadius = 8
@@ -142,6 +143,8 @@ class RegistrationVC: UIViewController,GIDSignInUIDelegate,GIDSignInDelegate,get
         if(textField == firstNameTF){
             lastNameTF.becomeFirstResponder()
         }else if(textField == lastNameTF){
+            userNameTF.becomeFirstResponder()
+        }else if(textField == userNameTF){
             emailTF.becomeFirstResponder()
         }else if(textField == emailTF){
             passwordTF.becomeFirstResponder()
@@ -165,13 +168,16 @@ class RegistrationVC: UIViewController,GIDSignInUIDelegate,GIDSignInDelegate,get
         }
 
         if(textField == firstNameTF){
-            utilities.setPlaceHolder("First Name", validateText: "Valid", textField: firstNameTF)
+            utilities.setPlaceHolder("First Name*", validateText: "Valid", textField: firstNameTF)
         }else if(textField == lastNameTF){
             utilities.setPlaceHolder("Last Name", validateText: "Valid", textField: lastNameTF)
+        }else if(textField == userNameTF){
+            utilities.setPlaceHolder("User Name*", validateText: "Valid", textField: lastNameTF)
+            
         }else if(textField == emailTF){
-            utilities.setPlaceHolder("Email", validateText: "Valid", textField: emailTF)
+            utilities.setPlaceHolder("Email*", validateText: "Valid", textField: emailTF)
         }else if(textField == passwordTF){
-            utilities.setPlaceHolder("Password", validateText: "Valid", textField: passwordTF)
+            utilities.setPlaceHolder("Password*", validateText: "Valid", textField: passwordTF)
         }
     }
     
@@ -200,12 +206,12 @@ class RegistrationVC: UIViewController,GIDSignInUIDelegate,GIDSignInDelegate,get
         let emailStr: String = emailTF.text!
         let passwordStr: String = passwordTF.text!
         let lastNameStr: String = lastNameTF.text!
-//        let userNameStr: String = userNameTF.text!
+        let userNameStr: String = userNameTF.text!
         
         if(firstNameStr.isEmpty && emailStr.isEmpty && passwordStr.isEmpty){
             
             utilities.setPlaceHolder(FIRST_NAME_IN_VALID_PLACEHOLDER, validateText: "Invalid", textField: firstNameTF)
-//            utilities.setPlaceHolder(USER_NAME_IN_VALID_PLACEHOLDER, validateText: "Invalid", textField: userNameTF)
+            utilities.setPlaceHolder(USER_NAME_IN_VALID_PLACEHOLDER, validateText: "Invalid", textField: userNameTF)
             utilities.setPlaceHolder(EMAIL_IN_VALID_PLACEHOLDER, validateText: "Invalid", textField: emailTF)
             utilities.setPlaceHolder(PASSWORD_IN_VALID_PLACEHOLDER, validateText: "Invalid", textField: passwordTF)
             
@@ -214,9 +220,9 @@ class RegistrationVC: UIViewController,GIDSignInUIDelegate,GIDSignInDelegate,get
             if firstNameStr.isEmpty {
                 utilities.setPlaceHolder(FIRST_NAME_IN_VALID_PLACEHOLDER, validateText: "Invalid", textField: firstNameTF)
             }
-//            if userNameStr.isEmpty{
-//                utilities.setPlaceHolder(USER_NAME_IN_VALID_PLACEHOLDER, validateText: "Invalid", textField: userNameTF)
-//            }
+            if userNameStr.isEmpty{
+                utilities.setPlaceHolder(USER_NAME_IN_VALID_PLACEHOLDER, validateText: "Invalid", textField: userNameTF)
+            }
             if emailStr.isEmpty{
                 utilities.setPlaceHolder(EMAIL_IN_VALID_PLACEHOLDER, validateText: "Invalid", textField: emailTF)
             }
@@ -227,7 +233,7 @@ class RegistrationVC: UIViewController,GIDSignInUIDelegate,GIDSignInDelegate,get
         }else{
             
             let rigisterDict : NSMutableDictionary = NSMutableDictionary()
-//            rigisterDict.setObject(userNameStr, forKey: "username")
+            rigisterDict.setObject(userNameStr, forKey: "username")
             rigisterDict.setObject(emailStr, forKey: "email")
             rigisterDict.setObject(passwordStr, forKey: "password")
             rigisterDict.setObject(firstNameStr, forKey: "firstName")
@@ -277,12 +283,12 @@ class RegistrationVC: UIViewController,GIDSignInUIDelegate,GIDSignInDelegate,get
         withError error: NSError!) {
             if (error == nil) {
                 // Perform any operations on signed in user here.
-                let userId = user.userID                  // For client-side use only!
-                let idToken = user.authentication.idToken // Safe to send to the server
-                let name = user.profile.name
-                let email = user.profile.email
-                
-                let expiry = user.authentication // Safe to send to the server
+//                let userId = user.userID                  // For client-side use only!
+//                let idToken = user.authentication.idToken // Safe to send to the server
+//                let name = user.profile.name
+//                let email = user.profile.email
+//                
+//                let expiry = user.authentication // Safe to send to the server
                 let accessToken = user.authentication.accessToken
                 
                 
@@ -341,7 +347,7 @@ class RegistrationVC: UIViewController,GIDSignInUIDelegate,GIDSignInDelegate,get
         
         if(newApiModel.tokenApiModel != nil){
             
-            var tokenEty : TokenApiModel = newApiModel.tokenApiModel
+            let tokenEty : TokenApiModel = newApiModel.tokenApiModel
             let memberEty : MemberApiModel = newApiModel.memberApiModel
             let defaults = NSUserDefaults.standardUserDefaults()
             let accessToken = tokenEty.access_token
@@ -401,7 +407,7 @@ class RegistrationVC: UIViewController,GIDSignInUIDelegate,GIDSignInDelegate,get
         MBProgressHUD.hideHUDForView(self.view, animated: true)
         let errorMessage: NSMutableString = ""
         
-        for var i = 0; i < messageCodeEntityArray.count; i++ {
+        for i in 0 ..< messageCodeEntityArray.count {
             let messageCode : ValidationMessagesApiModel = messageCodeEntityArray.objectAtIndex(i) as! ValidationMessagesApiModel
             let messageStr = messageCode.message
             errorMessage.appendString(messageStr)
@@ -426,10 +432,10 @@ class RegistrationVC: UIViewController,GIDSignInUIDelegate,GIDSignInDelegate,get
     }
 
     func refreshTextFields(){
-        utilities.setPlaceHolder("First Name", validateText: "Valid", textField: firstNameTF)
+        utilities.setPlaceHolder("First Name*", validateText: "Valid", textField: firstNameTF)
         utilities.setPlaceHolder("Last Name", validateText: "Valid", textField: lastNameTF)
-//        utilities.setPlaceHolder("User Name", validateText: "Valid", textField: userNameTF)
-        utilities.setPlaceHolder("Email", validateText: "Valid", textField: emailTF)
-        utilities.setPlaceHolder("Password", validateText: "Valid", textField: passwordTF)
+        utilities.setPlaceHolder("User Name*", validateText: "Valid", textField: userNameTF)
+        utilities.setPlaceHolder("Email*", validateText: "Valid", textField: emailTF)
+        utilities.setPlaceHolder("Password*", validateText: "Valid", textField: passwordTF)
     }
 }
