@@ -240,8 +240,6 @@ class utilities {
     
     class func addGradientLayer(imageView: UIImageView, height: Int) {
     
-    
-       
         let gradient = CAGradientLayer()
         gradient.name = "ImgGradientLayer"
         gradient.frame = CGRectMake(imageView.frame.origin.x, imageView.frame.origin.y, imageView.frame.size.width, CGFloat(height))
@@ -271,4 +269,28 @@ class utilities {
         }
         imageView.layer.insertSublayer(gradient, atIndex: 0)
     }
+    
+    
+    class func addLogoImage(imageView : UIImageView) {
+        
+        let url = NSURL(string: "{{logo}}")
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+            
+            if(url != nil){
+                let data = NSData(contentsOfURL: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check
+                if(data != nil){
+                    dispatch_async(dispatch_get_main_queue(), {
+                        imageView.image = UIImage(data: data!)
+                    });
+                }else{
+                    imageView.image = UIImage(named:"nbos_ic")
+                }
+            }else{
+                imageView.image = UIImage(named:"nbos_ic")
+            }
+        }
+    }
+    
+    
 }

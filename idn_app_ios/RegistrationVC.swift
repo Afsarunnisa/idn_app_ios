@@ -18,7 +18,6 @@ import wavelabs_ios_client_api
 class RegistrationVC: UIViewController,GIDSignInUIDelegate,GIDSignInDelegate,getUsersApiResponseDelegate,getSocialApiResponseDelegate {
     
     
-    @IBOutlet weak var bannerImageView: UIImageView!
     var hud : MBProgressHUD = MBProgressHUD()
 
     var kPreferredTextFieldToKeyboardOffset: CGFloat = 600.0
@@ -46,7 +45,9 @@ class RegistrationVC: UIViewController,GIDSignInUIDelegate,GIDSignInDelegate,get
     
     var bannerImg_View_Height_Constraint:NSLayoutConstraint!
 
-    
+    @IBOutlet weak var bannerImageView: UIImageView!
+    @IBOutlet weak var logoImageView: UIImageView!
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -118,6 +119,7 @@ class RegistrationVC: UIViewController,GIDSignInUIDelegate,GIDSignInDelegate,get
         self.view.addConstraint(bannerImg_View_Height_Constraint)
         
         utilities.addGradientLayer(bannerImageView, height: imgHeight)
+        utilities.addLogoImage(logoImageView)
 
     }
     

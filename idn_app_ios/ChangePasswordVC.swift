@@ -23,6 +23,7 @@ class ChangePasswordVC: UIViewController,getAuthApiResponseDelegate{
     var hud : MBProgressHUD = MBProgressHUD()
     @IBOutlet weak var menuButton: UIButton!
     @IBOutlet weak var bannerImageView: UIImageView!
+    @IBOutlet weak var logoImageView: UIImageView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,7 +77,7 @@ class ChangePasswordVC: UIViewController,getAuthApiResponseDelegate{
         
         let imgHeight : CGFloat = bannerImageView.frame.size.height
         utilities.addGradientLayer(bannerImageView, height: Int(imgHeight))
-
+        utilities.addLogoImage(logoImageView)
 
     }
     

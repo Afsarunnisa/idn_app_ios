@@ -29,7 +29,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         var configureError: NSError?
         GGLContext.sharedInstance().configureWithError(&configureError)
         assert(configureError == nil, "Error configuring Google services: \(configureError)")
-
+        
+//        let clientID = "{{clinetId}}"
+//        let clientSecret = "{{clinetSecret}}"
+//        
+//        if(clientID != "" && clientSecret != ""){
+//            
+//        }
+//        
+//        let documentsDirectory = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as NSString
+//        let path : NSString = documentsDirectory.stringByAppendingPathComponent("info.plist")
+//        let data : NSMutableDictionary = NSMutableDictionary(contentsOfFile: path as String)!
+//        data.setObject("{{clinetId}}", forKey: "key")
+//        data.setObject("{{clinetSecret}}", forKey: "key")
+//        data.writeToFile(path as String, atomically: true)
         
         return true
     }
@@ -38,7 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication,
                      openURL url: NSURL,
                              sourceApplication: String?,
-                             annotation: AnyObject?) -> Bool {
+                             annotation: AnyObject) -> Bool {
         
         var handled: Bool = false
         let isFb = url.scheme.hasPrefix("fb")

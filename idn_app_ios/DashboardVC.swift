@@ -14,7 +14,7 @@ class DashboardVC: UIViewController {
 
     @IBOutlet weak var bannerImageView: UIImageView!
     @IBOutlet weak var menuButton: UIButton!
-    
+    @IBOutlet weak var logoImageView: UIImageView!
     
     
     override func viewDidLoad() {
@@ -23,10 +23,6 @@ class DashboardVC: UIViewController {
 //        self.navigationItem.backBarButtonItem = menuButton;
 
         if self.revealViewController() != nil {
-//            menuButton.target = self.revealViewController()
-//            menuButton.action = "revealToggle:"
-            
-            
             menuButton.addTarget(self.revealViewController(), action:#selector(self.revealViewController().revealToggle(_:)), forControlEvents: .TouchUpInside)
 
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
@@ -45,6 +41,7 @@ class DashboardVC: UIViewController {
 
         let imgHeight : CGFloat = bannerImageView.frame.size.height
         utilities.addGradientLayer(bannerImageView, height: Int(imgHeight))
+        utilities.addLogoImage(logoImageView)
 
     }
     

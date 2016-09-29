@@ -87,7 +87,7 @@
                                             <constraint firstAttribute="height" constant="130" id="G1F-9C-Eem"/>
                                         </constraints>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nbos_ic" translatesAutoresizingMaskIntoConstraints="NO" id="AlH-Yh-ESl">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="AlH-Yh-ESl">
                                         <rect key="frame" x="260" y="25" width="80" height="80"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="AlH-Yh-ESl" secondAttribute="height" multiplier="1:1" id="SlZ-6P-4X2"/>
@@ -338,6 +338,7 @@
                         <outlet property="bannerImageView" destination="1v0-7E-NZ5" id="JFv-gQ-M1i"/>
                         <outlet property="cantRememberPasswordBtn" destination="Mwz-uS-Kob" id="eSx-ZO-ivL"/>
                         <outlet property="emailTextField" destination="dpP-VV-4eV" id="QcA-O5-4fD"/>
+                        <outlet property="logoImageView" destination="AlH-Yh-ESl" id="VMG-Lz-1Zf"/>
                         <outlet property="passwordTextField" destination="W5j-Ul-Scn" id="5Mi-fL-NY5"/>
                         <outlet property="registerBtn" destination="uk5-ES-tev" id="Uga-Yk-ggQ"/>
                         <outlet property="signInButton" destination="ay6-8i-ooc" id="S9n-qQ-GHP"/>
@@ -406,7 +407,7 @@
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nj9-9u-VW5">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="100"/>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nbos_ic" translatesAutoresizingMaskIntoConstraints="NO" id="T9v-ME-EtN">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="T9v-ME-EtN">
                                         <rect key="frame" x="260" y="10" width="80" height="80"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="80" id="pFs-Kd-n5N"/>
@@ -459,6 +460,7 @@
                     <navigationItem key="navigationItem" id="9sx-KI-jwL"/>
                     <connections>
                         <outlet property="bannerImageView" destination="nj9-9u-VW5" id="Hui-hL-2eO"/>
+                        <outlet property="logoImageView" destination="T9v-ME-EtN" id="Uvl-bf-gWl"/>
                         <outlet property="menuButton" destination="tVK-PV-hyF" id="XAy-tx-shC"/>
                     </connections>
                 </viewController>
@@ -510,6 +512,12 @@
                                         </constraints>
                                         <state key="normal" image="menu_ic"/>
                                     </button>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="m7n-lx-5SQ">
+                                        <rect key="frame" x="260" y="10" width="80" height="80"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="80" id="gqs-Jq-N0x"/>
+                                        </constraints>
+                                    </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user-avator.png" translatesAutoresizingMaskIntoConstraints="NO" id="ds5-ak-9Q6">
                                         <rect key="frame" x="20" y="120" width="140" height="140"/>
                                         <constraints>
@@ -547,12 +555,6 @@
                                             <action selector="updateBtnClicked:" destination="Ta9-GH-yZ0" eventType="touchUpInside" id="YkE-4c-oF7"/>
                                         </connections>
                                     </button>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nbos_ic" translatesAutoresizingMaskIntoConstraints="NO" id="m7n-lx-5SQ">
-                                        <rect key="frame" x="260" y="10" width="80" height="80"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="80" id="gqs-Jq-N0x"/>
-                                        </constraints>
-                                    </imageView>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Lastname" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8SN-jn-ffK">
                                         <rect key="frame" x="181" y="203" width="391" height="38"/>
                                         <constraints>
@@ -659,6 +661,7 @@
                         <outlet property="emailTF" destination="6Lf-4y-4qL" id="DCz-bf-5b2"/>
                         <outlet property="firstNameTF" destination="cpQ-vI-YM6" id="N6o-K1-3sw"/>
                         <outlet property="lastNameTF" destination="8SN-jn-ffK" id="qkW-JC-Joe"/>
+                        <outlet property="logoImageView" destination="m7n-lx-5SQ" id="ifT-6U-z56"/>
                         <outlet property="menuButton" destination="ea2-6Y-o8n" id="g0I-Ry-tpj"/>
                         <outlet property="updateBtn" destination="FZ6-ku-tp5" id="vZ4-3l-CPz"/>
                         <outlet property="userImageView" destination="ds5-ak-9Q6" id="Mjy-Ql-hHj"/>
@@ -722,6 +725,13 @@
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                     </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kcw-go-07T" customClass="GIDSignInButton">
+                                        <rect key="frame" x="81" y="444" width="48" height="48"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="48" id="M4f-8e-LUx"/>
+                                        </constraints>
+                                    </view>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Last Name*" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="6Ka-t9-tJC">
                                         <rect key="frame" x="20" y="204" width="560" height="46"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -903,12 +913,6 @@
                                             <constraint firstAttribute="height" constant="130" id="NzG-ry-DXZ"/>
                                         </constraints>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nbos_ic" translatesAutoresizingMaskIntoConstraints="NO" id="nIs-j7-Bhl">
-                                        <rect key="frame" x="260" y="25" width="80" height="80"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="80" id="fLg-HW-KJV"/>
-                                        </constraints>
-                                    </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kZc-kT-GsG">
                                         <rect key="frame" x="18" y="45" width="40" height="40"/>
                                         <constraints>
@@ -920,13 +924,12 @@
                                             <action selector="goBackBtnClick:" destination="Yv0-Ul-MXd" eventType="touchUpInside" id="OgJ-0F-AAf"/>
                                         </connections>
                                     </button>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kcw-go-07T" customClass="GIDSignInButton">
-                                        <rect key="frame" x="81" y="444" width="48" height="48"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nIs-j7-Bhl">
+                                        <rect key="frame" x="260" y="25" width="80" height="80"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="48" id="M4f-8e-LUx"/>
+                                            <constraint firstAttribute="width" constant="80" id="fLg-HW-KJV"/>
                                         </constraints>
-                                    </view>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -1038,6 +1041,7 @@
                         <outlet property="googleSignInButton" destination="kcw-go-07T" id="bG2-Qx-Xgn"/>
                         <outlet property="lastNameTF" destination="6Ka-t9-tJC" id="1FL-mc-uDd"/>
                         <outlet property="loginButton" destination="bGl-Kc-20l" id="HWl-d8-GDq"/>
+                        <outlet property="logoImageView" destination="nIs-j7-Bhl" id="HvF-3c-aBa"/>
                         <outlet property="passwordTF" destination="PjC-gj-m6U" id="1vm-Tx-e2K"/>
                         <outlet property="signUpBtn" destination="b1o-kg-QQP" id="RsM-Qn-Ozg"/>
                         <outlet property="signUpScrollView" destination="SZE-zd-cpE" id="3Sl-Pd-m8m"/>
@@ -1205,7 +1209,7 @@
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Lbt-Be-x04">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="100"/>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nbos_ic" translatesAutoresizingMaskIntoConstraints="NO" id="kiI-CR-Tyz">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kiI-CR-Tyz">
                                         <rect key="frame" x="260" y="10" width="80" height="80"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="80" id="cSG-RT-ffp"/>
@@ -1368,6 +1372,7 @@
                         <outlet property="bannerImageView" destination="Lbt-Be-x04" id="Lv9-jS-L3b"/>
                         <outlet property="changePasswordBtn" destination="OFQ-wg-2g0" id="wVh-TA-8eS"/>
                         <outlet property="currentPasswordTF" destination="lV1-iM-amv" id="ThB-ik-iEa"/>
+                        <outlet property="logoImageView" destination="kiI-CR-Tyz" id="PUf-ZR-pG9"/>
                         <outlet property="menuButton" destination="InN-s4-0dq" id="5vI-58-4P0"/>
                         <outlet property="newPasswordTF" destination="04T-pO-WZ2" id="I2P-k5-bbk"/>
                     </connections>
@@ -1400,7 +1405,6 @@
         <image name="facebook_ic" width="60" height="60"/>
         <image name="goBack_ic" width="60" height="60"/>
         <image name="menu_ic" width="60" height="60"/>
-        <image name="nbos_ic" width="60" height="60"/>
         <image name="pencil-icon.png" width="14" height="14"/>
         <image name="reveal-icon.png" width="60" height="60"/>
         <image name="user-avator.png" width="60" height="60"/>

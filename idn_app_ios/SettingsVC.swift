@@ -24,7 +24,7 @@ class SettingsVC: UIViewController,UINavigationControllerDelegate,UIImagePickerC
     
     @IBOutlet weak var bannerImageView: UIImageView!
     @IBOutlet weak var menuButton: UIButton!
-    
+    @IBOutlet weak var logoImageView: UIImageView!
     
     var uploadImageButton : UIButton!
     var photoSheet : UIActionSheet!
@@ -105,6 +105,7 @@ class SettingsVC: UIViewController,UINavigationControllerDelegate,UIImagePickerC
         
         let imgHeight : CGFloat = bannerImageView.frame.size.height
         utilities.addGradientLayer(bannerImageView, height: Int(imgHeight))
+        utilities.addLogoImage(logoImageView)
     }
     
     

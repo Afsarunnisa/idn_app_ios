@@ -42,6 +42,7 @@ class LoginVC: UIViewController,UIAlertViewDelegate,UITextFieldDelegate,UIImageP
     var socialApi : SocialApi = SocialApi()
     
     @IBOutlet weak var bannerImageView: UIImageView!
+    @IBOutlet weak var logoImageView: UIImageView!
     
     
     var bannerImg_View_Height_Constraint:NSLayoutConstraint!
@@ -113,7 +114,10 @@ class LoginVC: UIViewController,UIAlertViewDelegate,UITextFieldDelegate,UIImageP
         self.view.addConstraint(bannerImg_View_Height_Constraint)
         
         utilities.addGradientLayer(bannerImageView, height: imgHeight)
+        utilities.addLogoImage(logoImageView)
+    
         authApi.getClientToken(clientTokenDict)
+        
     }
     
     override func viewWillAppear(animated: Bool) {
